@@ -321,4 +321,77 @@ export default function App() {
         </div>
 
         {/* Add/Edit form */}
-        <form className="
+        <form className="form" onSubmit={saveRecord}>
+          <div className="grid">
+            <label>
+              Month / Year
+              <input
+                type="month"
+                value={form.dateMonth}
+                onChange={(e) => setForm((f) => ({ ...f, dateMonth: e.target.value }))}
+              />
+            </label>
+
+            <label>
+              Service type (free text)
+              <input
+                value={form.serviceType}
+                onChange={(e) => setForm((f) => ({ ...f, serviceType: e.target.value }))}
+                placeholder="e.g., Replaced chain"
+              />
+            </label>
+          </div>
+
+          <label>
+            Notes (optional)
+            <textarea
+              rows={3}
+              value={form.notes}
+              onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
+              placeholder="Anything you want to remember…"
+            />
+          </label>
+
+          <div className="actions">
+            <button type="submit">{editingId ? "Save changes" : "Add record"}</button>
+            <button type="button" className="secondary" onClick={cancelEdit}>
+              Cancel
+            </button>
+            {editingId ? <span className="muted">Editing existing record</span> : null}
+          </div>
+        </form>
+
+        {/* List */}
+        <div className="list">
+          {!selectedBikeId ? (
+            <p className="muted">Add a bike to start tracking maintenance.</p>
+          ) : filteredRecords.length === 0 ? (
+            <p className="muted">No service records yet.</p>
+          ) : (
+            filteredRecords.map((r) => (
+              <div key={r.id} className="listItem">
+                <div className="listMain">
+                  <div className="listTitle">
+                    <strong>{r.serviceType}</strong>
+                    <span className="pill">{r.date}</span>
+                  </div>
+                  {r.notes ? <div className="listNotes">{r.notes}</div> : <div className="muted">No notes</div>}
+                </div>
+                <div className="listActions">
+                  <button type="button" onClick={() => startEdit(r)}>
+                    Edit
+                  </button>
+                  <button type="button" className="danger" onClick={() => deleteRecord(r.id)}>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </section>
+
+      <footer className="footer muted">Data is stored locally in this browser (LocalStorage).</footer>
+    </div>
+  );
+}
