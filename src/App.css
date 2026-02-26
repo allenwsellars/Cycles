@@ -186,3 +186,13 @@ button:disabled {
     align-items: center;
   }
 }
+.headerRight {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Make the import textarea feel nicer */
+.card textarea {
+  width: 100%;
+}
