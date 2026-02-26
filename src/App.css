@@ -13,6 +13,12 @@
   margin-bottom: 16px;
 }
 
+.headerRight {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
 .card {
   border: 1px solid #e6e6e6;
   border-radius: 12px;
@@ -62,13 +68,15 @@ textarea {
   border: 1px solid #d6d6d6;
   border-radius: 8px;
   padding: 8px 10px;
+
+  /* responsive sizing */
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
 }
 
 textarea {
-  min-width: 100%;
+  width: 100%;
 }
 
 button {
@@ -167,7 +175,12 @@ button:disabled {
   font-size: 13px;
 }
 
+/* Mobile / small screen adjustments */
 @media (max-width: 640px) {
+  .container {
+    padding: 16px;
+  }
+
   .grid {
     grid-template-columns: 1fr;
   }
@@ -185,14 +198,4 @@ button:disabled {
   .listActions {
     align-items: center;
   }
-}
-.headerRight {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-/* Make the import textarea feel nicer */
-.card textarea {
-  width: 100%;
 }
